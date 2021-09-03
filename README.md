@@ -23,16 +23,13 @@ The project can currently be built for both windows and webgl in the following w
 
 * **Automated**: `build_all.bat` will run build and `pc` and `webgl` version of the project
   * Double click on `build_all.bat`
-  https://aiesydprogyr12021.github.io/aie_cpd-BenMate/
   * The process will take some time, leave the console window open
   * The following files will be produced:
     * PC Build: `builds/pc/YourGame.exe` 
     * WebGL Build: `builds/web/index.html`
 
 ## Daily Builds:
-Daily builds of the project should be placed on the local campus network drive
-
-there is a daily build for pc currently availible.
+https://aiesydprogyr12021.github.io/aie_cpd-BenMate/
 
 # Credits:
  Are there assets, sounds or media included within the project that require attributation? list them here:
