@@ -29,6 +29,7 @@ The project can currently be built for both windows and webgl in the following w
     * WebGL Build: `builds/web/index.html`
 
 ## Daily Builds:
+clicking this link will open the webgl version.
 https://aiesydprogyr12021.github.io/aie_cpd-BenMate/
 
 # Credits:

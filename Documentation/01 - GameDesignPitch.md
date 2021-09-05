@@ -36,18 +36,25 @@ the expience i want to player to feel is to be stronger then the enemys and only
 
 some Screen shoots i can show are gameplay and the players health.
 
-![alt text](./images/ScreenShot_1.png "Player Health")
-![alt text](./images/ScreenShot_2.png "GamePlay")
+![alt text](./images/Health.png "Logo Title Health 3")
+![alt text](./images/GamePlay.png "Logo Title Text 2")
 
-TODO--------------------------------------------------------------------------------------------------------------------------------------------
 
 ## Game Systems
 What systems are needed to make this game? Which ones are internal (simulation, etc.) and which does the player interact with? 
 
+- Enemys and the environment - these are phsical objects the player interacts with.
 
+- Unity editor - When making the game is sumlated what the game is to test it.
+
+- unity cloud build system - saves and runs the builds that the player interacts with.
+
+- BlueStacks(android simulation) - Run and test android build.
 
 ## Interactivity
 How are different kinds of interactivity used? (Perceptual, ST Cognitive, LT Cognitive, Emotional, Social, Cultural) What is the player doing Moment‐by‐moment? How does the player move through the world?  How does physics/combat/etc. work? 
+
+
 
 ## Game UI:
 A clear, professional‐looking sketch of the primary game UX is helpful. 
