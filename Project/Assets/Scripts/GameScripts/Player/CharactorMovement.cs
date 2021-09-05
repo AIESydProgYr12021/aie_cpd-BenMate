@@ -27,12 +27,11 @@ public class CharactorMovement : MonoBehaviour
     Vector3 worldMousePos = Vector3.zero;
 
 
-
     public Joystick joystick;
 
-#if UNITY_ANDROID || UNITY_EDITOR
-    public bool onAndroid = true;
-#endif
+    #if UNITY_ANDROID || UNITY_EDITOR
+    public bool onAndroid = false;
+    #endif
 
     void Start()
     {
@@ -47,10 +46,9 @@ public class CharactorMovement : MonoBehaviour
 
     void Update()
     {
-
-
         WalkControls();
-        LookControls();
+        LookControlsMouse();
+
         CharacterAnimations();
     }
 
@@ -86,29 +84,25 @@ public class CharactorMovement : MonoBehaviour
     {
         Vector3 localVel = rb.velocity;
 
-        if (onAndroid)
-        {
-            localVel.x = -joystick.Horizontal * movementSpeed;
-            localVel.z = -joystick.Vertical * movementSpeed;
-        }
-        else
-        {
-            
+        //if (onAndroid)
+        //{
+        //localVel.x = -joystick.Horizontal * movementSpeed;
+        //localVel.z = -joystick.Vertical * movementSpeed;
+        //}
+        //else
+       // {
+
+
             localVel.z = -Input.GetAxis("Vertical") * movementSpeed;
             localVel.x = -Input.GetAxis("Horizontal") * movementSpeed;
+       // }
             
-        }
         rb.velocity = localVel;
     }
 
-    void LookControls()
+    void LookControlsMouse()
     {
-        if (onAndroid)
-        {
-
-        }
-        else
-        {
+       
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
 
@@ -121,6 +115,6 @@ public class CharactorMovement : MonoBehaviour
                 head.transform.LookAt(worldMousePos);
             }
 
-        } 
+        
     }
 }
