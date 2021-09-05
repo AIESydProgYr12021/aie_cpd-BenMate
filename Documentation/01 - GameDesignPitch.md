@@ -35,10 +35,8 @@ The look and feel of my game im going for is an arcade shooter, a low poly carto
 the expience i want to player to feel is to be stronger then the enemys and only losing because they made a bad judgment in movement.
 
 some Screen shoots i can show are gameplay and the players health.
-
-![alt text](./images/Health.png "Logo Title Health 3")
 ![alt text](./images/GamePlay.png "Logo Title Text 2")
-
+![alt text](./images/Health.png "Logo Title Health 3")
 
 ## Game Systems
 What systems are needed to make this game? Which ones are internal (simulation, etc.) and which does the player interact with? 
