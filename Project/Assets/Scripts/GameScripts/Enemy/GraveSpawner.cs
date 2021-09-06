@@ -20,7 +20,7 @@ public class GraveSpawner : MonoBehaviour
     {
         timer += Time.deltaTime;
 
-        if (timer > 3.0f)
+        if (timer > 1.0f)
         {
             int randEnemy = Random.Range(0, zombies.Length);
             int randspawnPoint = Random.Range(0, spawnPoints.Length);
