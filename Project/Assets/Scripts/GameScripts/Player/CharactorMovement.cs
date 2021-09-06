@@ -2,12 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
-
-//#if UNITY_ANDROID || UNITY_EDITOR
-// Debug.log("ANDROID INIT");
-//#endif
-
 [RequireComponent(typeof(Rigidbody)), RequireComponent(typeof(Animator))]
 
 public class CharactorMovement : MonoBehaviour
@@ -24,17 +18,19 @@ public class CharactorMovement : MonoBehaviour
     public GameObject head;
     public GameObject winScreen;
 
+    public ThumbStick thumbstick;
+
+    
     Vector3 worldMousePos = Vector3.zero;
 
-
-    public Joystick joystick;
-
-    #if UNITY_ANDROID || UNITY_EDITOR
     public bool onAndroid = false;
-    #endif
 
     void Start()
     {
+#if UNITY_ANDROID || UNITY_EDITOR
+        onAndroid = true;
+ #endif
+
         Time.timeScale = 1.0f; //starts the game off as 1 so the player can be paused.
 
         animator = GetComponent<Animator>();
@@ -84,25 +80,32 @@ public class CharactorMovement : MonoBehaviour
     {
         Vector3 localVel = rb.velocity;
 
-        //if (onAndroid)
-        //{
-        //localVel.x = -joystick.Horizontal * movementSpeed;
-        //localVel.z = -joystick.Vertical * movementSpeed;
-        //}
-        //else
-       // {
+        if (onAndroid)
+        {
+            localVel.x = -thumbstick.Direction.x * movementSpeed;
+            localVel.z = -thumbstick.Direction.y * movementSpeed;
 
+            //rotates player
 
+            if (thumbstick.Direction != Vector2.zero)
+            {
+                transform.LookAt(transform.position + new Vector3(-thumbstick.Direction.x, 0, -thumbstick.Direction.y), Vector3.up);
+            }
+ 
+        }
+        else
+        {
             localVel.z = -Input.GetAxis("Vertical") * movementSpeed;
             localVel.x = -Input.GetAxis("Horizontal") * movementSpeed;
-       // }
-            
+        }
         rb.velocity = localVel;
     }
 
     void LookControlsMouse()
-    {
-       
+    {           
+        //pc build
+        if (!onAndroid)
+        {
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
 
@@ -114,7 +117,6 @@ public class CharactorMovement : MonoBehaviour
                 transform.LookAt(new Vector3(worldMousePos.x, transform.position.y, worldMousePos.z));
                 head.transform.LookAt(worldMousePos);
             }
-
-        
+        }
     }
 }

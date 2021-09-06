@@ -12,6 +12,8 @@ public class GunShoot : MonoBehaviour
 
     Vector3 worldMousePos = Vector3.zero;
 
+    public bool onAndorid = false;
+
 
     void Start()
     {
@@ -21,50 +23,55 @@ public class GunShoot : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        LookControls();
+#if UNITY_ANDROID || UNITY_EDITOR
+        onAndorid = true;
+#endif
+        LookAndShootControls();
 
-        if (Input.GetButtonDown("Fire1"))
-        {
-            if (Time.timeScale > 0)
-            {
-              
-               Shoot();
-            }
-           
-        }      
+            
     }
 
-    void Shoot()
+    public void Shoot()
     {
         GameObject bullet = Instantiate(bulletPreFab, firePoint.position, firePoint.rotation);
         Rigidbody rb = bullet.GetComponent<Rigidbody>();
         rb.AddForce(firePoint.forward * bulletForce, ForceMode.Impulse);
     }
 
-    void LookControls()
+    void LookAndShootControls()
     {
-        Ray ray = cam.ScreenPointToRay(Input.mousePosition);
-
-        RaycastHit hit;
-
-        if (Physics.Raycast(ray, out hit, int.MaxValue))
+        if (onAndorid)
         {
-            worldMousePos = hit.point;
-        }
+            //todo: rotate and shoot using joystick.
 
-        if (Time.timeScale > 0)
+
+        }
+        //pc build
+        else
         {
-            firePoint.transform.LookAt(new Vector3(worldMousePos.x, firePoint.transform.position.y, worldMousePos.z)); 
+            Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
 
-            //aimbot
-            //if (ZombieManager.instance.zombiePositions.Count > 0)
-            //{
-            //    Vector3 pos = ZombieManager.instance.zombiePositions[0].position;
-            //    firePoint.transform.LookAt(new Vector3(pos.x,firePoint.transform.position.y,pos.z));
-            //}
-            
-        }
+            if (Physics.Raycast(ray, out hit, int.MaxValue))
+            {
+                worldMousePos = hit.point;
+            }
 
+            if (Time.timeScale > 0)
+            {
+                firePoint.transform.LookAt(new Vector3(worldMousePos.x, firePoint.transform.position.y, worldMousePos.z));
+            }
+            //shots when you press mouse1
+            if (Input.GetButtonDown("Fire1"))
+            {
+                if (Time.timeScale > 0)
+                {
+                    Shoot();
+                }
+
+            }
+
+
+        }        
     }
-
 }

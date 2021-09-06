@@ -11,6 +11,8 @@ public class ThumbStick : MonoBehaviour, IDragHandler, IPointerUpHandler, IPoint
 {
     [SerializeField] private float joystickVisualDistance = 50;
 
+    
+
     private Image container;
     private Image joystick;
 
@@ -20,6 +22,8 @@ public class ThumbStick : MonoBehaviour, IDragHandler, IPointerUpHandler, IPoint
     private bool isControllsShowing = true;
     public bool syncWithInput = true;
     private bool isDragging = false;
+
+   
 
     // Start is called before the first frame update
     void Start()
@@ -32,9 +36,9 @@ public class ThumbStick : MonoBehaviour, IDragHandler, IPointerUpHandler, IPoint
 
     void Update()
     {
-        #if UNITY_ANDROID || UNITY_EDITOR
+#if UNITY_ANDROID || UNITY_EDITOR
         showControl = true;
-        #endif
+#endif
 
         if (showControl != isControllsShowing)
         {
