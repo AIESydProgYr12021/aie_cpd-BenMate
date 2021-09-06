@@ -28,6 +28,10 @@ public class ThumbStick : MonoBehaviour, IDragHandler, IPointerUpHandler, IPoint
     // Start is called before the first frame update
     void Start()
     {
+
+#if UNITY_ANDROID
+        showControl = true;
+#endif
         var images = GetComponentsInChildren<Image>();
 
         container = images[0];
@@ -36,10 +40,6 @@ public class ThumbStick : MonoBehaviour, IDragHandler, IPointerUpHandler, IPoint
 
     void Update()
     {
-#if UNITY_ANDROID || UNITY_EDITOR
-        showControl = true;
-#endif
-
         if (showControl != isControllsShowing)
         {
             container.enabled = showControl;

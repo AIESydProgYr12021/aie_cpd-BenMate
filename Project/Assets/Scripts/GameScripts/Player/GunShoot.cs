@@ -14,21 +14,27 @@ public class GunShoot : MonoBehaviour
 
     public bool onAndorid = false;
 
+    public GameObject shootbutton;
 
     void Start()
     {
+#if UNITY_ANDROID
+        onAndorid = true;
+#endif
+
+        if (onAndorid) shootbutton.SetActive(true);
+        
         cam = Camera.main;
     }
 
     // Update is called once per frame
     void Update()
     {
-#if UNITY_ANDROID || UNITY_EDITOR
-        onAndorid = true;
-#endif
-        LookAndShootControls();
 
-            
+
+      
+
+        LookAndShootControls();         
     }
 
     public void Shoot()
@@ -40,14 +46,7 @@ public class GunShoot : MonoBehaviour
 
     void LookAndShootControls()
     {
-        if (onAndorid)
-        {
-            //todo: rotate and shoot using joystick.
-
-
-        }
-        //pc build
-        else
+        if (!onAndorid)
         {
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;

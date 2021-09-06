@@ -8,6 +8,7 @@ public class GraveSpawner : MonoBehaviour
     public Transform[] spawnPoints;
     public GameObject[] zombies;
 
+    float timer = 0.0f;
 
     void Start()
     {
@@ -17,12 +18,16 @@ public class GraveSpawner : MonoBehaviour
    
     void Update()
     {
-        if (Input.GetMouseButton(1))
+        timer += Time.deltaTime;
+
+        if (timer > 3.0f)
         {
             int randEnemy = Random.Range(0, zombies.Length);
             int randspawnPoint = Random.Range(0, spawnPoints.Length);
 
-            Instantiate(zombies[randEnemy], spawnPoints[randspawnPoint].position, transform.rotation);  
+            Instantiate(zombies[randEnemy], spawnPoints[randspawnPoint].position, transform.rotation);
+
+            timer = 0;
         }
     }
 }

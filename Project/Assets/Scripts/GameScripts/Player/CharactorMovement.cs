@@ -23,11 +23,11 @@ public class CharactorMovement : MonoBehaviour
     
     Vector3 worldMousePos = Vector3.zero;
 
-    public bool onAndroid = false;
+    bool onAndroid = false;
 
     void Start()
     {
-#if UNITY_ANDROID || UNITY_EDITOR
+#if UNITY_ANDROID
         onAndroid = true;
  #endif
 
@@ -103,7 +103,6 @@ public class CharactorMovement : MonoBehaviour
 
     void LookControlsMouse()
     {           
-        //pc build
         if (!onAndroid)
         {
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);
