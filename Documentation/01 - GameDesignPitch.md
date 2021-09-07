@@ -52,7 +52,13 @@ What systems are needed to make this game? Which ones are internal (simulation, 
 ## Interactivity
 How are different kinds of interactivity used? (Perceptual, ST Cognitive, LT Cognitive, Emotional, Social, Cultural) What is the player doing Moment‐by‐moment? How does the player move through the world?  How does physics/combat/etc. work? 
 
+# Entities
 
+ - describe the player
+ - describe zombie type 1
+ -- health, speed, damage, size, abilities
+ - describe zombie type 2
+ -- health, speed, damage, size, abilities
 
 ## Game UI:
 A clear, professional‐looking sketch of the primary game UX is helpful. 
