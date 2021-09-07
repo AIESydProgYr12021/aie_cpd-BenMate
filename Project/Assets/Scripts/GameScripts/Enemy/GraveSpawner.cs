@@ -4,30 +4,30 @@ using UnityEngine;
 
 public class GraveSpawner : MonoBehaviour
 {
+    float graveTimer = 0.0f;
+    
 
-    public Transform[] spawnPoints;
-    public GameObject[] zombies;
-
-    float timer = 0.0f;
-
+    public GameObject[] graves;
+  
+    
     void Start()
     {
         
     }
 
-   
     void Update()
-    {
-        timer += Time.deltaTime;
+    {    
+        graveTimer += Time.deltaTime;
+        
 
-        if (timer > 1.0f)
-        {
-            int randEnemy = Random.Range(0, zombies.Length);
-            int randspawnPoint = Random.Range(0, spawnPoints.Length);
+        if (graveTimer > 1.0f)
+        {    
+            int graveIndex = Random.Range(0, graves.Length);
 
-            Instantiate(zombies[randEnemy], spawnPoints[randspawnPoint].position, transform.rotation);
+            graves[graveIndex].GetComponent<Grave>().grave.SetActive(true);
 
-            timer = 0;
+          
+            graveTimer = 0;     
         }
     }
 }

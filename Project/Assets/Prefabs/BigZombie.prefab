@@ -1220,10 +1220,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ebc55381a7717e41a4c3466ced5e1d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lookRadius: 10
+  lookRadius: 100
   maxHealth: 100
   currentHealth: 100
   maxZombieSize: 3
+  dealDamage: 8
   zombieBody: {fileID: 963117735936345475}
   healthBar: {fileID: 3626159835149966179}
 --- !u!1 &4157376086148694810

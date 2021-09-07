@@ -4,7 +4,7 @@ pause
 
 REM : Default install directory for unity via UnityHub
 REM : If building on school computers - this directory will need to be edited
-SET UnityDir="C:\Program Files\Unity\Hub\Editor\2020.3.12f1\Editor\Unity.exe"
+SET UnityDir="C:\Program Files\Unity\Hub\Editor\2020.3.15f2\Editor\Unity.exe"
 
 
 

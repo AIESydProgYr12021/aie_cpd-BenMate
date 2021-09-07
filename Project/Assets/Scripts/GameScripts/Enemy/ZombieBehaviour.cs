@@ -11,16 +11,19 @@ public class ZombieBehaviour : MonoBehaviour
     public int maxHealth = 100;
     public int currentHealth;
     public float maxZombieSize;
+    public int dealDamage = 4;
+    public float timer = 0.6f;
 
     public Transform zombieBody;
     public HealthBar healthBar;
+
+    
+    float damageTimer;
 
     Animator animator;
     Transform target;
     NavMeshAgent agent;
 
-   
-   
     void Start()
     {
         currentHealth = maxHealth;
@@ -32,7 +35,8 @@ public class ZombieBehaviour : MonoBehaviour
         target = PlayerManager.instance.player.transform;
         agent = GetComponent<NavMeshAgent>();
 
-      
+
+        damageTimer = timer;
     }
 
     void Update()
@@ -43,13 +47,6 @@ public class ZombieBehaviour : MonoBehaviour
     }
 
 
-    void FreezeZombies()
-    {
-       //freeze x position? or something
-
-        //stop them from attacking by either making their hit radius super small or something else
-    }
-
     void DestroyZombie()
     {      
         Destroy(gameObject);
@@ -57,11 +54,34 @@ public class ZombieBehaviour : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.collider.tag == "Bullet")
+        if (collision.collider.CompareTag("Bullet"))
         {
             //FindObjectOfType<AudioManager>().Play("ZombieGrowl");
 
             TakeDamage(20);
+        } 
+    }
+
+    void OnCollisionStay(Collision collision)
+    {
+       
+        if (collision.collider.CompareTag("Player"))
+        {
+            damageTimer += Time.deltaTime;
+
+            if (damageTimer >= timer && currentHealth > 0)
+            {
+                collision.collider.GetComponent<CharactorMovement>().TakeDamage(dealDamage);
+                damageTimer = 0.0f;
+            }           
+        }       
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.collider.CompareTag("Player"))
+        {
+            damageTimer = timer;
         }
     }
 
@@ -69,24 +89,22 @@ public class ZombieBehaviour : MonoBehaviour
     {
         currentHealth -= damage;
         healthBar.SetHealth(currentHealth);
-
     }
 
     void WalkControls()
     {
         float distance = Vector3.Distance(target.position, transform.position);
+        animator.SetBool("isWalking", distance <= lookRadius && currentHealth > 1);
 
-        if (distance <= lookRadius)
-        {
-            agent.SetDestination(target.position);
-
-            animator.SetBool("isWalking", distance <= lookRadius && currentHealth > 1);
-
-            if (distance <= agent.stoppingDistance)
-            {
-                FaceTarget();
-            }
-        }
+        if (currentHealth > 0 && distance <= lookRadius)
+        {        
+                agent.SetDestination(target.position);  
+                
+                if (distance <= agent.stoppingDistance)
+                {
+                    FaceTarget();
+                }            
+        }    
     }
 
     void FaceTarget()
@@ -94,6 +112,8 @@ public class ZombieBehaviour : MonoBehaviour
         Vector3 direction = (target.position - transform.position).normalized;
         Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5.0f);
+        
+        //todo: play an animations
     }
 
     void OnDrawGizmosSelected()

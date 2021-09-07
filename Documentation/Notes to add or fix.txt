@@ -1,0 +1,34 @@
+power ups
+--------
+health
+guns  
+knockback
+ring of fire
+
+
+Fix zombies
+-----------
+
+less zombies
+fix navmesh
+diffrent zombies
+
+
+Menu
+------------
+score system
+instructions
+music
+onclick sounds
+
+
+
+Android
+-----------
+remove shoot button
+add second joystick that shoots and rotates
+
+
+pc builds
+------------
+when mouse on enemies it bugs when you shoot.

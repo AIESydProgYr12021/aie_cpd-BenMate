@@ -9,21 +9,19 @@ public class CharactorMovement : MonoBehaviour
     public int maxHealth = 28;
     public int currentHealth;
     public float movementSpeed = 1.0f;
+    bool onAndroid = false;
 
     Animator animator;
     Rigidbody rb;
+    ZombieBehaviour zb;
 
     public HealthBar healthBar;
     public Camera cam;
     public GameObject head;
     public GameObject winScreen;
-
     public ThumbStick thumbstick;
 
-    
     Vector3 worldMousePos = Vector3.zero;
-
-    bool onAndroid = false;
 
     void Start()
     {
@@ -48,14 +46,6 @@ public class CharactorMovement : MonoBehaviour
         CharacterAnimations();
     }
 
-    void OnCollisionEnter(Collision collision)
-    {
-        if (collision.collider.CompareTag("Zombie"))
-        {
-            TakeDamage(4);   //change from being hardcoded as 4
-        }
-    }
-
     void PlayerDeath()
     {
         winScreen.SetActive(true);
@@ -68,8 +58,9 @@ public class CharactorMovement : MonoBehaviour
         animator.SetBool("isDead", currentHealth < 1);
     }
 
-    void TakeDamage(int damage)
+    public void TakeDamage(int damage)
     {
+
         currentHealth -= damage;
         healthBar.SetHealth(currentHealth);
 
@@ -86,12 +77,8 @@ public class CharactorMovement : MonoBehaviour
             localVel.z = -thumbstick.Direction.y * movementSpeed;
 
             //rotates player
-
-            if (thumbstick.Direction != Vector2.zero)
-            {
-                transform.LookAt(transform.position + new Vector3(-thumbstick.Direction.x, 0, -thumbstick.Direction.y), Vector3.up);
-            }
- 
+            if (thumbstick.Direction != Vector2.zero)        
+                transform.LookAt(transform.position + new Vector3(-thumbstick.Direction.x, 0, -thumbstick.Direction.y), Vector3.up);         
         }
         else
         {
@@ -108,8 +95,12 @@ public class CharactorMovement : MonoBehaviour
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
 
-            if (Physics.Raycast(ray, out hit, int.MaxValue))
+            if (Physics.Raycast(ray, out hit, int.MaxValue, 1 << 3))
+            {
                 worldMousePos = hit.point;
+                Debug.DrawLine(transform.position,hit.point,Color.red);
+            }
+                
 
             if (Time.timeScale > 0)
             {
