@@ -9,8 +9,9 @@ ring of fire
 Fix zombies
 -----------
 
-less zombies
-fix navmesh
+less zombies - done
+fix navmesh - done
+
 diffrent zombies
 
 

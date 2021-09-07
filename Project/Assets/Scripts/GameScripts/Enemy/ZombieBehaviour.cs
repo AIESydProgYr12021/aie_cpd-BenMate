@@ -94,6 +94,7 @@ public class ZombieBehaviour : MonoBehaviour
     void WalkControls()
     {
         float distance = Vector3.Distance(target.position, transform.position);
+
         animator.SetBool("isWalking", distance <= lookRadius && currentHealth > 1);
 
         if (currentHealth > 0 && distance <= lookRadius)
