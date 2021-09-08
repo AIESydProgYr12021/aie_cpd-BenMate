@@ -25,7 +25,7 @@ public class ThumbStick : MonoBehaviour, IDragHandler, IPointerUpHandler, IPoint
 
    
 
-    // Start is called before the first frame update
+    
     void Start()
     {
 

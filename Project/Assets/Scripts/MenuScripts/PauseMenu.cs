@@ -9,8 +9,25 @@ public class PauseMenu : MonoBehaviour
 
     public GameObject pauseMenuUI;
     public GameObject WinMenu;
+    public GameObject pauseButton;
 
-    // Update is called once per frame
+    bool onAndroid = false;
+
+
+
+    void Start()
+    {
+#if UNITY_ANDROID
+        onAndroid = true;
+#endif
+
+        if (onAndroid)
+        {
+            pauseButton.SetActive(true);
+        }
+    }
+
+
     void Update()
     {
         if (WinMenu.activeInHierarchy == false)
@@ -27,7 +44,7 @@ public class PauseMenu : MonoBehaviour
                 }
             }
         }
-        
+
     }
 
     public void Resume()
@@ -37,7 +54,7 @@ public class PauseMenu : MonoBehaviour
         gameIsPaused = false;
     }
 
-   void Pause()
+    public void Pause()
     {
         pauseMenuUI.SetActive(true);
         Time.timeScale = 0.0f;

@@ -11,23 +11,28 @@ public class CharactorMovement : MonoBehaviour
     public float movementSpeed = 1.0f;
     bool onAndroid = false;
 
-    Animator animator;
-    Rigidbody rb;
-    ZombieBehaviour zb;
-
     public HealthBar healthBar;
     public Camera cam;
     public GameObject head;
     public GameObject winScreen;
-    public ThumbStick thumbstick;
+    public ThumbStick leftStick;
+    public ThumbStick rightStick;
+    public GunShoot gs;
+
+    Animator animator;
+    Rigidbody rb;
+    ZombieBehaviour zb;
+
 
     Vector3 worldMousePos = Vector3.zero;
+
+    float timer = 0.0f;
 
     void Start()
     {
 #if UNITY_ANDROID
         onAndroid = true;
- #endif
+#endif
 
         Time.timeScale = 1.0f; //starts the game off as 1 so the player can be paused.
 
@@ -40,6 +45,8 @@ public class CharactorMovement : MonoBehaviour
 
     void Update()
     {
+        timer += Time.deltaTime;
+
         WalkControls();
         LookControlsMouse();
 
@@ -70,26 +77,44 @@ public class CharactorMovement : MonoBehaviour
     void WalkControls()
     {
         Vector3 localVel = rb.velocity;
-
-        if (onAndroid)
+        if (currentHealth > 0)
         {
-            localVel.x = -thumbstick.Direction.x * movementSpeed;
-            localVel.z = -thumbstick.Direction.y * movementSpeed;
+            if (onAndroid)
+            {
+                localVel.x = -leftStick.Direction.x * movementSpeed;
+                localVel.z = -leftStick.Direction.y * movementSpeed;
 
-            //rotates player
-            if (thumbstick.Direction != Vector2.zero)        
-                transform.LookAt(transform.position + new Vector3(-thumbstick.Direction.x, 0, -thumbstick.Direction.y), Vector3.up);         
+                //rotates player
+                if (rightStick.Direction != Vector2.zero)
+                {
+                    transform.LookAt(transform.position + new Vector3(-rightStick.Direction.x, 0, -rightStick.Direction.y), Vector3.up);
+
+                    //shoots
+                    if (timer > 0.3f)
+                    {
+                        gs.Shoot();
+                        timer = 0.0f;
+                    }
+                }
+                //when you release stick 
+                else
+                {
+                    timer = 0.0f;
+                }
+            }
+            //not on android
+            else
+            {
+                localVel.z = -Input.GetAxis("Vertical") * movementSpeed;
+                localVel.x = -Input.GetAxis("Horizontal") * movementSpeed;
+            }
+
+            rb.velocity = localVel;
         }
-        else
-        {
-            localVel.z = -Input.GetAxis("Vertical") * movementSpeed;
-            localVel.x = -Input.GetAxis("Horizontal") * movementSpeed;
-        }
-        rb.velocity = localVel;
     }
 
     void LookControlsMouse()
-    {           
+    {
         if (!onAndroid)
         {
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);
@@ -100,7 +125,6 @@ public class CharactorMovement : MonoBehaviour
                 worldMousePos = hit.point;
                 Debug.DrawLine(transform.position, worldMousePos, Color.red);
             }
-                
 
             if (Time.timeScale > 0)
             {
