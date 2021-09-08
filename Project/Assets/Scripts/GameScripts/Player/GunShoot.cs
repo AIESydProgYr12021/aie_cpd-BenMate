@@ -48,18 +48,19 @@ public class GunShoot : MonoBehaviour
     {
         if (!onAndorid)
         {
-            Ray ray = cam.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
+            //Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+            //RaycastHit hit;
 
-            if (Physics.Raycast(ray, out hit, int.MaxValue))
-            {
-                worldMousePos = hit.point;
-            }
+            //if (Physics.Raycast(ray, out hit, int.MaxValue))
+            //{
+            //    worldMousePos = hit.point;
+            //}
 
             if (Time.timeScale > 0)
             {
-                firePoint.transform.LookAt(new Vector3(worldMousePos.x, firePoint.transform.position.y, worldMousePos.z));
+                // firePoint.transform.LookAt(new Vector3(worldMousePos.x, firePoint.transform.position.y, worldMousePos.z));
             }
+
             //shots when you press mouse1
             if (Input.GetButtonDown("Fire1"))
             {
@@ -72,5 +73,11 @@ public class GunShoot : MonoBehaviour
 
 
         }        
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawRay(firePoint.position, firePoint.forward);
     }
 }

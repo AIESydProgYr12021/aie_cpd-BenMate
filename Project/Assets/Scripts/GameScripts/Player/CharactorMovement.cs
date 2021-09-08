@@ -98,7 +98,7 @@ public class CharactorMovement : MonoBehaviour
             if (Physics.Raycast(ray, out hit, int.MaxValue, 1 << 3))
             {
                 worldMousePos = hit.point;
-                Debug.DrawLine(transform.position,hit.point,Color.red);
+                Debug.DrawLine(transform.position, worldMousePos, Color.red);
             }
                 
 
@@ -108,5 +108,12 @@ public class CharactorMovement : MonoBehaviour
                 head.transform.LookAt(worldMousePos);
             }
         }
+    }
+
+    private void OnDrawGizmos()
+    {
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(transform.position, worldMousePos);
     }
 }
