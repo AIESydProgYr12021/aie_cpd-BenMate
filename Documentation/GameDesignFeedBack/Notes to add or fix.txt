@@ -4,15 +4,13 @@ health
 guns  
 knockback
 ring of fire
-
+MONEY
 
 Fix zombies
 -----------
 
-less zombies - done
-fix navmesh - done
-
 diffrent zombies
+player makes a hurt sound or flashes red
 
 
 Menu
@@ -24,12 +22,16 @@ onclick sounds
 
 
 
+mechanics
+-----------
+
+add wave system.
+potentialy add a buy screen.
+
+
 Android
 -----------
-remove shoot button
-add second joystick that shoots and rotates
 
 
 pc builds
 ------------
-when mouse on enemies it bugs when you shoot.

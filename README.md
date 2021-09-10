@@ -8,7 +8,9 @@ the game is a zombie survival / shooter. You are responding to an emergancy call
 Contributors to the project are strictly limated to AIE Students as part of their group work project.
 
 Members:
-- Ben Scott: programmer
+- Ben Scott: Game developer / Programer
+- Daniel Destafanis: Game Tester
+- Jordan Schofield: Game Tester
 
 ## Build Steps:
 The project can currently be built for both windows and webgl in the following ways:
