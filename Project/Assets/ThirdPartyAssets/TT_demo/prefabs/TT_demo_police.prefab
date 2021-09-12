@@ -246,11 +246,14 @@ MonoBehaviour:
   maxHealth: 28
   currentHealth: 28
   movementSpeed: 2
+  score: 0
   healthBar: {fileID: 0}
   cam: {fileID: 0}
   head: {fileID: 8619338778009079855}
   winScreen: {fileID: 0}
-  thumbstick: {fileID: 0}
+  leftStick: {fileID: 0}
+  rightStick: {fileID: 0}
+  gs: {fileID: 2061458659}
 --- !u!82 &2061458662
 AudioSource:
   m_ObjectHideFlags: 0
@@ -372,12 +375,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 10
+  bulletForce: 8
   firePoint: {fileID: 1022760032}
   bulletPreFab: {fileID: 8982082685660248068, guid: 884b54f6cc7c3d04ab1bb9a4ce72dd07, type: 3}
   cam: {fileID: 0}
-  bulletForce: 8
-  onAndorid: 0
-  shootbutton: {fileID: 0}
 --- !u!1 &8619338778009079855
 GameObject:
   m_ObjectHideFlags: 0

@@ -2,8 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-
-
+using UnityEngine.UI;
 
 public class ZombieBehaviour : MonoBehaviour
 {
@@ -14,10 +13,11 @@ public class ZombieBehaviour : MonoBehaviour
     public int dealDamage = 4;
     public float timer = 0.6f;
 
+    public Text text;
     public Transform zombieBody;
     public HealthBar healthBar;
-
     
+
     float damageTimer;
 
     Animator animator;
@@ -35,7 +35,6 @@ public class ZombieBehaviour : MonoBehaviour
         target = PlayerManager.instance.player.transform;
         agent = GetComponent<NavMeshAgent>();
 
-
         damageTimer = timer;
     }
 
@@ -46,25 +45,24 @@ public class ZombieBehaviour : MonoBehaviour
         WalkControls();
     }
 
-
     void DestroyZombie()
-    {      
+    {
+        Score.instance.UpdateScore(Random.Range(1,6));
+
+        //deletes zombie 
         Destroy(gameObject);
     }
 
     void OnCollisionEnter(Collision collision)
     {
         if (collision.collider.CompareTag("Bullet"))
-        {
-            //FindObjectOfType<AudioManager>().Play("ZombieGrowl");
-
+        {        
             TakeDamage(20);
         } 
     }
 
     void OnCollisionStay(Collision collision)
-    {
-       
+    {   
         if (collision.collider.CompareTag("Player"))
         {
             damageTimer += Time.deltaTime;

@@ -11,6 +11,8 @@ public class PauseMenu : MonoBehaviour
     public GameObject WinMenu;
     public GameObject pauseButton;
 
+    public Score score;
+
     bool onAndroid = false;
 
 
@@ -65,6 +67,11 @@ public class PauseMenu : MonoBehaviour
     public void LoadMenu()
     {
         SceneManager.LoadScene("Menu");
+
+        if (score.playerScore > PlayerPrefs.GetInt("HScore"))
+        {
+            PlayerPrefs.SetInt("HScore", score.playerScore);
+        }
     }
 
     public void QuitGame()

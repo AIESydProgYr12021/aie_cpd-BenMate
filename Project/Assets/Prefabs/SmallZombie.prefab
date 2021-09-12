@@ -1224,6 +1224,10 @@ MonoBehaviour:
   maxHealth: 50
   currentHealth: 50
   maxZombieSize: 3
+  dealDamage: 4
+  timer: 0.6
+  playerScore: {fileID: 0}
+  text: {fileID: 526349332989655930, guid: ec65e1cab099eeb4fbb7b22589dfb0d7, type: 3}
   zombieBody: {fileID: 1155004146218808422}
   healthBar: {fileID: 3626159835149966179}
 --- !u!1 &4157376086148694810

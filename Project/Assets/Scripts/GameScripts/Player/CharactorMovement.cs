@@ -9,20 +9,21 @@ public class CharactorMovement : MonoBehaviour
     public int maxHealth = 28;
     public int currentHealth;
     public float movementSpeed = 1.0f;
+    
     bool onAndroid = false;
 
     public HealthBar healthBar;
     public Camera cam;
     public GameObject head;
     public GameObject winScreen;
+    public GameObject oldScore;
     public ThumbStick leftStick;
     public ThumbStick rightStick;
     public GunShoot gs;
 
     Animator animator;
     Rigidbody rb;
-    ZombieBehaviour zb;
-
+  
 
     Vector3 worldMousePos = Vector3.zero;
 
@@ -40,7 +41,7 @@ public class CharactorMovement : MonoBehaviour
         rb = GetComponent<Rigidbody>();
 
         currentHealth = maxHealth;
-        healthBar.SetMaxHealth(maxHealth);
+        healthBar.SetMaxHealth(maxHealth); 
     }
 
     void Update()
@@ -49,13 +50,15 @@ public class CharactorMovement : MonoBehaviour
 
         WalkControls();
         LookControlsMouse();
-
-        CharacterAnimations();
+        CharacterAnimations();       
     }
 
     void PlayerDeath()
     {
         winScreen.SetActive(true);
+        oldScore.SetActive(false);
+
+
         Time.timeScale = 0.0f;
     }
 
@@ -79,6 +82,7 @@ public class CharactorMovement : MonoBehaviour
         Vector3 localVel = rb.velocity;
         if (currentHealth > 0)
         {
+            //moves player
             if (onAndroid)
             {
                 localVel.x = -leftStick.Direction.x * movementSpeed;
@@ -102,13 +106,13 @@ public class CharactorMovement : MonoBehaviour
                     timer = 0.0f;
                 }
             }
+
             //not on android
             else
             {
                 localVel.z = -Input.GetAxis("Vertical") * movementSpeed;
                 localVel.x = -Input.GetAxis("Horizontal") * movementSpeed;
             }
-
             rb.velocity = localVel;
         }
     }
@@ -133,6 +137,8 @@ public class CharactorMovement : MonoBehaviour
             }
         }
     }
+
+    
 
     private void OnDrawGizmos()
     {

@@ -194,7 +194,7 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.9685535
+      - time: 0.9685534
         functionName: DestroyZombie
         data: 
         objectReferenceParameter: {fileID: 11500000, guid: 3ebc55381a7717e41a4c3466ced5e1d2, type: 3}
