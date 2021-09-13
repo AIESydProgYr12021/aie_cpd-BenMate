@@ -1226,10 +1226,11 @@ MonoBehaviour:
   maxZombieSize: 3
   dealDamage: 4
   timer: 0.6
-  playerScore: {fileID: 0}
   text: {fileID: 526349332989655930, guid: ec65e1cab099eeb4fbb7b22589dfb0d7, type: 3}
   zombieBody: {fileID: 1155004146218808422}
   healthBar: {fileID: 3626159835149966179}
+  bulletSplash: {fileID: 3100282817815064859, guid: e92645b3416f4d54882b7e4748a35aee, type: 3}
+  zomCollider: {fileID: 3626159834984665538}
 --- !u!1 &4157376086148694810
 GameObject:
   m_ObjectHideFlags: 0

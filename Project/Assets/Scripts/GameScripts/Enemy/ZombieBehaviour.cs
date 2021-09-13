@@ -16,7 +16,8 @@ public class ZombieBehaviour : MonoBehaviour
     public Text text;
     public Transform zombieBody;
     public HealthBar healthBar;
-    
+    public GameObject bulletSplash;
+    public Collider zomCollider;
 
     float damageTimer;
 
@@ -25,7 +26,7 @@ public class ZombieBehaviour : MonoBehaviour
     NavMeshAgent agent;
 
     void Start()
-    {
+    {      
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
 
@@ -39,18 +40,17 @@ public class ZombieBehaviour : MonoBehaviour
     }
 
     void Update()
-    {
+    {    
         animator.SetBool("isDead", currentHealth < 1);
+     
 
+        if (currentHealth < 1)
+        {
+            zomCollider.enabled = false;
+            agent.enabled = false;
+        }
+       
         WalkControls();
-    }
-
-    void DestroyZombie()
-    {
-        Score.instance.UpdateScore(Random.Range(1,6));
-
-        //deletes zombie 
-        Destroy(gameObject);
     }
 
     void OnCollisionEnter(Collision collision)
@@ -58,6 +58,10 @@ public class ZombieBehaviour : MonoBehaviour
         if (collision.collider.CompareTag("Bullet"))
         {        
             TakeDamage(20);
+
+            //add particle effect...
+            Instantiate(bulletSplash, collision.transform.position, Quaternion.identity);
+
         } 
     }
 
@@ -91,6 +95,12 @@ public class ZombieBehaviour : MonoBehaviour
 
     void WalkControls()
     {
+        //changes speed over time
+        agent.speed = ZombieManager.instance.zombieSpeed;
+
+        //change animation speed over time
+        animator.speed = (maxZombieSize - zombieBody.transform.localScale.y) * ZombieManager.instance.zombieSpeed;
+
         float distance = Vector3.Distance(target.position, transform.position);
 
         animator.SetBool("isWalking", distance <= lookRadius && currentHealth > 1);
@@ -113,6 +123,14 @@ public class ZombieBehaviour : MonoBehaviour
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5.0f);
         
         //todo: play an animations of attacks
+    }
+
+    void DestroyZombie()
+    {
+        Score.instance.UpdateScore(Random.Range(1, 6));
+
+        //deletes zombie 
+        Destroy(gameObject);
     }
 
     void OnDrawGizmosSelected()

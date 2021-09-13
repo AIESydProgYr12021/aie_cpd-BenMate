@@ -42,11 +42,17 @@ some Screen shoots i can show are gameplay and the players health.
 ## Game Systems
 What systems are needed to make this game? Which ones are internal (simulation, etc.) and which does the player interact with? 
 
-- Enemies - endless waves of undead zombies the player interacts with the zombies by loosing health and gaining points
+talk about spawning
 
-- health bar - when the player has 0 health the game is over.
+joysticks only on android platform
 
-- thumbsticks - on Android the player uses thumbsticks to move around and shoot.
+talk about oncolison triggers
+
+
+
+- Enemies - endless waves of undead zombies the player interacts with the zombies by loosing health and gaining points ,,, 3 states talk about them
+
+- health bar - when the player has 0 health the game is over. 
 
 ## Interactivity
 

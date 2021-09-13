@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Linq;
 
 public class HighScoreTable : MonoBehaviour
 {
@@ -51,8 +52,14 @@ public class HighScoreTable : MonoBehaviour
         }      
     }
 
+      
+    
+
     void CreateHighscoreEntryTransform(HighscoreEntry highscoreEntry, Transform container, List<Transform> transformList)
     {
+        //List<HighscoreEntry> myscores = new List<HighscoreEntry>();
+        //myscores = myscores.OrderBy(z => z.score).ToList();
+
         
         Transform entryTransform = Instantiate(entryTemplate, container);
         RectTransform entryRectTransform = entryTransform.GetComponent<RectTransform>();

@@ -6,10 +6,8 @@ public class GraveSpawner : MonoBehaviour
 {
     float graveTimer = 0.0f;
     
-
     public GameObject[] graves;
   
-    
     void Start()
     {
         

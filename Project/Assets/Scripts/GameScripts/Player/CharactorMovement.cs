@@ -20,6 +20,7 @@ public class CharactorMovement : MonoBehaviour
     public ThumbStick leftStick;
     public ThumbStick rightStick;
     public GunShoot gs;
+    
 
     Animator animator;
     Rigidbody rb;
@@ -47,6 +48,12 @@ public class CharactorMovement : MonoBehaviour
     void Update()
     {
         timer += Time.deltaTime;
+
+        if (currentHealth < 1 )
+        {
+            gs.enabled = false;
+        }
+
 
         WalkControls();
         LookControlsMouse();
@@ -80,13 +87,16 @@ public class CharactorMovement : MonoBehaviour
     void WalkControls()
     {
         Vector3 localVel = rb.velocity;
+        Vector3 movement = Vector3.zero;
+
+
         if (currentHealth > 0)
         {
             //moves player
             if (onAndroid)
             {
-                localVel.x = -leftStick.Direction.x * movementSpeed;
-                localVel.z = -leftStick.Direction.y * movementSpeed;
+                movement.x = -leftStick.Direction.x;
+                movement.z = -leftStick.Direction.y;
 
                 //rotates player
                 if (rightStick.Direction != Vector2.zero)
@@ -110,16 +120,22 @@ public class CharactorMovement : MonoBehaviour
             //not on android
             else
             {
-                localVel.z = -Input.GetAxis("Vertical") * movementSpeed;
-                localVel.x = -Input.GetAxis("Horizontal") * movementSpeed;
+                movement.z = -Input.GetAxis("Vertical");
+                movement.x = -Input.GetAxis("Horizontal");
             }
+
+            localVel.x = movement.x * movementSpeed;
+            localVel.z = movement.z * movementSpeed;
+            
             rb.velocity = localVel;
+
+            //Debug.Log(rb.velocity.magnitude);
         }
     }
 
     void LookControlsMouse()
     {
-        if (!onAndroid)
+        if (!onAndroid && currentHealth > 0)
         {
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
