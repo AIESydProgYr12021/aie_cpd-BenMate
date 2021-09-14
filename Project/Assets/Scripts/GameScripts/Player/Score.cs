@@ -8,24 +8,34 @@ public class Score : MonoBehaviour
     public static Score instance;
 
     public Text scoreText;
-
+    
     public int playerScore = 0;
+    public int playerPowerUps = 0;
 
 
     private void Awake()
     {
-        instance = this;
+        if (instance == null)       
+            instance = this;    
+        else      
+            Destroy(this);
+        
     }
 
     private void Start()
     {
-        scoreText.text = "Score : " + playerScore.ToString();
+        scoreText.text = "Score : " + playerScore.ToString();       
     }
 
     public void UpdateScore(int amountToAdd)
     {
         playerScore += amountToAdd;
-        scoreText.text = "Score : " + playerScore.ToString();
+        scoreText.text = "Score : " + playerScore.ToString(); 
+    }
+
+    public void UpdatePowerUpCount()
+    {
+        playerPowerUps++;
     }
 
 }

@@ -1,5 +1,7 @@
 # Game Design Pitch
-- The Game will be a bird eye view survival zombie shooter.
+
+- You find youself surrounded by zombies after responding to a call, 
+Will you use your gun and survive as long as possible, or will you fall and turn?
  
 ## Working Title
 Dont Turn
@@ -15,9 +17,10 @@ Dont Turn
 
 ## Player experience and game POV 
  
-- The player is the last surviver. He is attempting to survive by killing all of the zombies, The fantasy the game grants the player is the feel of overcomming hordes of zombies. 
-I want the player to feel strong and powerful but after a couple waves feel outnumbered and enter a panic state because of the number of zombies. 
-The players game experience will be early on they will be strong and powerful but later on start to struggle. the POV will be bird eye view.
+- I want the player to feel strong and powerful but after a couple minutes feel rushed and paniced.  
+At first the zombies are slow and easy to kill. After a while you start feeling  more rushed because you dont have time to sit still.
+
+- The point of view is bird like.
 
 ## Unique Selling Points
 
@@ -42,17 +45,17 @@ some Screen shoots i can show are gameplay and the players health.
 ## Game Systems
 What systems are needed to make this game? Which ones are internal (simulation, etc.) and which does the player interact with? 
 
-talk about spawning
+- Spawning - Enemies have a grave system that appears in a random location around the map, by default the grave spawns a zombie after one seccond and then gets destroyed.
 
-joysticks only on android platform
+- Progressively harder - The grave over time makes the movement of zombies faster, spawn faster and their animations faster.
 
-talk about oncolison triggers
+- CrossPlatform controls - I have virtual joysticks that are disabled by default
 
+On windows the player moves with the keyboard and mouse but only on android 2 joysticks appear and control the players movement and rotation.
 
+- OnCollison Triggers - When the bullet prefab enters the zombies colision, damage is dealt - when the zombie enters the players radius/colision dmage is dealt imediately and collisian stay function allows damage to be dealt over time if the player is still in the radius of the zombie.
 
-- Enemies - endless waves of undead zombies the player interacts with the zombies by loosing health and gaining points ,,, 3 states talk about them
-
-- health bar - when the player has 0 health the game is over. 
+- health bar - both enemies and the player have a health bar, when the bullet collides with the zombies a function is called and takes in a value and deal 'damage' to the health bar. ive added a gradient to the bar so the lower the health the more red it gets.
 
 ## Interactivity
 
@@ -102,6 +105,10 @@ The Big Zombie
 - damage is 8 which is 2 bars of health
 - size is 2.5
 
+PowerUps
+
+- health
+ Heals player 
 
 ## Game UI:
 - menu concept/wireframe

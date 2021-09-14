@@ -6,11 +6,13 @@ using UnityEngine;
 
 public class CharactorMovement : MonoBehaviour
 {
+    bool onAndroid = false;
+
     public int maxHealth = 28;
     public int currentHealth;
     public float movementSpeed = 1.0f;
-    
-    bool onAndroid = false;
+
+    public bool rifle = false;
 
     public HealthBar healthBar;
     public Camera cam;
@@ -29,6 +31,7 @@ public class CharactorMovement : MonoBehaviour
     Vector3 worldMousePos = Vector3.zero;
 
     float timer = 0.0f;
+    float gunTimer = 5.0f;
 
     void Start()
     {
@@ -57,7 +60,24 @@ public class CharactorMovement : MonoBehaviour
 
         WalkControls();
         LookControlsMouse();
-        CharacterAnimations();       
+        CharacterAnimations();
+
+        if (rifle == true)
+        {
+            if (Input.GetButton("Fire1"))
+            {
+                gs.Shoot();
+            }
+
+            gunTimer -= Time.deltaTime;
+
+            if (gunTimer < 0)
+            {
+                rifle = false;
+                gunTimer = 5.0f;
+            }
+            
+        }
     }
 
     void PlayerDeath()
@@ -154,7 +174,30 @@ public class CharactorMovement : MonoBehaviour
         }
     }
 
-    
+    void OnTriggerEnter(Collider other)
+    {
+      
+        if (other.CompareTag("HealthPack") && currentHealth < maxHealth)
+        {
+            currentHealth += Random.Range(1,3) * 4;
+            healthBar.SetHealth(currentHealth);
+
+            Score.instance.UpdatePowerUpCount();
+            Destroy(other.gameObject);
+        }
+
+        if (other.CompareTag("GunPack"))
+        {
+            //do the power up
+
+            
+            rifle = true;
+
+            Score.instance.UpdatePowerUpCount();
+            Destroy(other.gameObject);
+        }
+
+    }
 
     private void OnDrawGizmos()
     {

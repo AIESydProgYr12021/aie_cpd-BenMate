@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1725189989697032494}
   - component: {fileID: 2394759317124062268}
   - component: {fileID: 3173790133205081857}
+  - component: {fileID: 4099541974847855802}
   m_Layer: 0
   m_Name: BulletSplash
   m_TagString: Untagged
@@ -4805,3 +4806,16 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!114 &4099541974847855802
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3100282817815064859}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afbfd9a33d8b9004fabaf2c83897213c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  time: 1

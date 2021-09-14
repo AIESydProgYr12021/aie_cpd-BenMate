@@ -5580,6 +5580,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: AudioManager
       objectReference: {fileID: 0}
+    - target: {fileID: 368362127781355554, guid: 23a8f99c0688287478b04c1621de5cbd, type: 3}
+      propertyPath: sounds.Array.data[2].loop
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 368362127781355555, guid: 23a8f99c0688287478b04c1621de5cbd, type: 3}
       propertyPath: m_RootOrder
       value: 0

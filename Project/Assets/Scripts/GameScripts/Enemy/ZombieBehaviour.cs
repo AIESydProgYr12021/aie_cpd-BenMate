@@ -18,6 +18,8 @@ public class ZombieBehaviour : MonoBehaviour
     public HealthBar healthBar;
     public GameObject bulletSplash;
     public Collider zomCollider;
+    public GameObject healthPack;
+    public GameObject gunPack;
 
     float damageTimer;
 
@@ -75,6 +77,9 @@ public class ZombieBehaviour : MonoBehaviour
             {
                 collision.collider.GetComponent<CharactorMovement>().TakeDamage(dealDamage);
                 damageTimer = 0.0f;
+
+                
+                animator.SetBool("isAtt", true);
             }           
         }       
     }
@@ -84,6 +89,9 @@ public class ZombieBehaviour : MonoBehaviour
         if (collision.collider.CompareTag("Player"))
         {
             damageTimer = timer;
+            
+            animator.SetBool("isAtt", false);
+            
         }
     }
 
@@ -120,13 +128,26 @@ public class ZombieBehaviour : MonoBehaviour
     {
         Vector3 direction = (target.position - transform.position).normalized;
         Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
-        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5.0f);
-        
-        //todo: play an animations of attacks
+        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5.0f);         
     }
 
     void DestroyZombie()
     {
+        //drop a power up. one in 5 chance
+        int randomNumber = Random.Range(1,10);
+
+
+        if (randomNumber == 3)
+        {
+            Instantiate(healthPack, zombieBody.position + Vector3.up * 0.1f, zombieBody.rotation);
+        }
+        
+        if (randomNumber == 4)
+        {
+            Instantiate(gunPack, zombieBody.position + Vector3.up * 0.1f, zombieBody.rotation);
+        }
+
+        //increase score
         Score.instance.UpdateScore(Random.Range(1, 6));
 
         //deletes zombie 

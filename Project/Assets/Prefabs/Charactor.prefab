@@ -1084,7 +1084,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.46
+  m_Radius: 0.28
   m_Height: 1.89
   m_Direction: 1
   m_Center: {x: 0, y: 0.92, z: 0}
@@ -1107,6 +1107,7 @@ MonoBehaviour:
   cam: {fileID: 0}
   head: {fileID: 6375616645343866273}
   winScreen: {fileID: 0}
+  oldScore: {fileID: 0}
   leftStick: {fileID: 0}
   rightStick: {fileID: 0}
   gs: {fileID: 3451084961148150125}

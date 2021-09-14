@@ -1220,7 +1220,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ebc55381a7717e41a4c3466ced5e1d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lookRadius: 35
+  lookRadius: 100
   maxHealth: 100
   currentHealth: 100
   maxZombieSize: 3
@@ -1231,6 +1231,8 @@ MonoBehaviour:
   healthBar: {fileID: 3626159835149966179}
   bulletSplash: {fileID: 3100282817815064859, guid: e92645b3416f4d54882b7e4748a35aee, type: 3}
   zomCollider: {fileID: 3626159834984665538}
+  healthPack: {fileID: 2762148979197696809, guid: 065d9049e69748c42a6a1a6594fe99da, type: 3}
+  gunPack: {fileID: 3630322106997018607, guid: 07b808b8c88c15b47a3a97e7e26212c4, type: 3}
 --- !u!1 &4157376086148694810
 GameObject:
   m_ObjectHideFlags: 0

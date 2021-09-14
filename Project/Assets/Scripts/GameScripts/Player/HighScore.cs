@@ -2,33 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class HighScore : MonoBehaviour
 {
-    public Text text;
+    public TMP_Text powerUpText;
+    public TMP_Text scoreText;
     public Score score;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
+    
     void OnEnable()
     {
-        text.text = "Score : " + score.playerScore.ToString();
+        powerUpText.text = $"{score.playerPowerUps}";
+        scoreText.text = $"{score.playerScore}";
 
         //save the highscore if its a better score
-        if (score.playerScore > PlayerPrefs.GetInt("HScore"))
-        {
-            PlayerPrefs.SetInt("HScore", score.playerScore);
-        }
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        if (score.playerScore > PlayerPrefs.GetInt("HScore")) PlayerPrefs.SetInt("HScore", score.playerScore);
+            
     }
 }
