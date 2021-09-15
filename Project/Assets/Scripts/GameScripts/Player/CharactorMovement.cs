@@ -22,11 +22,11 @@ public class CharactorMovement : MonoBehaviour
     public ThumbStick leftStick;
     public ThumbStick rightStick;
     public GunShoot gs;
-    
+
 
     Animator animator;
     Rigidbody rb;
-  
+
 
     Vector3 worldMousePos = Vector3.zero;
 
@@ -45,14 +45,14 @@ public class CharactorMovement : MonoBehaviour
         rb = GetComponent<Rigidbody>();
 
         currentHealth = maxHealth;
-        healthBar.SetMaxHealth(maxHealth); 
+        healthBar.SetMaxHealth(maxHealth);
     }
 
     void Update()
     {
         timer += Time.deltaTime;
 
-        if (currentHealth < 1 )
+        if (currentHealth < 1)
         {
             gs.enabled = false;
         }
@@ -76,7 +76,7 @@ public class CharactorMovement : MonoBehaviour
                 rifle = false;
                 gunTimer = 5.0f;
             }
-            
+
         }
     }
 
@@ -129,6 +129,18 @@ public class CharactorMovement : MonoBehaviour
                         gs.Shoot();
                         timer = 0.0f;
                     }
+                    //power up shoots
+                    if (rifle == true)
+                    {
+                        gunTimer -= Time.deltaTime;  
+                        
+                        if (gunTimer < 0)
+                        {
+                            gs.Shoot();
+                            rifle = false;
+                            gunTimer = 5.0f;
+                        }                    
+                    }
                 }
                 //when you release stick 
                 else
@@ -146,9 +158,14 @@ public class CharactorMovement : MonoBehaviour
 
             localVel.x = movement.x * movementSpeed;
             localVel.z = movement.z * movementSpeed;
-            
+
+            //this code removes the diagonal speed up effect
+            //localVel.x = movement.normalized.x * movementSpeed;
+            //localVel.z = movement.normalized.z * movementSpeed;
+
             rb.velocity = localVel;
 
+            //shows the diagonal speed increase
             //Debug.Log(rb.velocity.magnitude);
         }
     }
@@ -176,10 +193,10 @@ public class CharactorMovement : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-      
+
         if (other.CompareTag("HealthPack") && currentHealth < maxHealth)
         {
-            currentHealth += Random.Range(1,3) * 4;
+            currentHealth += Random.Range(1, 3) * 4;
             healthBar.SetHealth(currentHealth);
 
             Score.instance.UpdatePowerUpCount();
@@ -190,7 +207,7 @@ public class CharactorMovement : MonoBehaviour
         {
             //do the power up
 
-            
+
             rifle = true;
 
             Score.instance.UpdatePowerUpCount();
