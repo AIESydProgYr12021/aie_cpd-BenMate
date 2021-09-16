@@ -41,4 +41,12 @@ https://aiesydprogyr12021.github.io/aie_cpd-BenMate/
 
  Low Poly Ultimate Environment Pack: Free Assets.
 
+# Sounds
+
  Zombie Sound Pack - Free Version.
+
+ Game music - https://opengameart.org/content/boss-battle-theme by CleytonKauffman
+
+ Menu music - https://opengameart.org/content/at-the-end-of-hope by Emma_MA
+
+ Gun Sounds - https://opengameart.org/content/bangs by dklon

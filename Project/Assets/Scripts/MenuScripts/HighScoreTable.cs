@@ -21,7 +21,7 @@ public class HighScoreTable : MonoBehaviour
 
         //attempt to add a new entry
 
-        AddHighscoreEntry(100, "TEST");
+        AddHighscoreEntry(100, "name");
 
        string jsonString = PlayerPrefs.GetString("highscoreTable");
        Highscores highscores = JsonUtility.FromJson<Highscores>(jsonString);

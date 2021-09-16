@@ -8,11 +8,4 @@ public class PlaySounds : MonoBehaviour
     {
         FindObjectOfType<AudioManager>().Play("WalkSound");       
     }
-
-   
-    private void Start()
-    {
-        FindObjectOfType<AudioManager>().Play("MenuMusic");
-    }
-
 }

@@ -44,6 +44,7 @@ public class GunShoot : MonoBehaviour
             {
                 if (Time.timeScale > 0)
                 {
+                    FindObjectOfType<AudioManager>().Play("ShootSound");
                     Shoot();
                 }
 

@@ -31,7 +31,7 @@ public class CharactorMovement : MonoBehaviour
     Vector3 worldMousePos = Vector3.zero;
 
     float timer = 0.0f;
-    float gunTimer = 5.0f;
+    float gunTimer = 0.0f;
 
     void Start()
     {
@@ -67,14 +67,16 @@ public class CharactorMovement : MonoBehaviour
             if (Input.GetButton("Fire1"))
             {
                 gs.Shoot();
+                FindObjectOfType<AudioManager>().Play("ShootSound");
             }
 
             gunTimer -= Time.deltaTime;
 
             if (gunTimer < 0)
-            {
+            {            
+                gunTimer = 0.0f;
                 rifle = false;
-                gunTimer = 5.0f;
+                FindObjectOfType<AudioManager>().Play("ShootSound");
             }
 
         }
@@ -100,8 +102,9 @@ public class CharactorMovement : MonoBehaviour
 
         currentHealth -= damage;
         healthBar.SetHealth(currentHealth);
+        
 
-        FindObjectOfType<AudioManager>().Play("PlayerDeath");
+        FindObjectOfType<AudioManager>().Play("Slap");
     }
 
     void WalkControls()
@@ -126,19 +129,22 @@ public class CharactorMovement : MonoBehaviour
                     //shoots
                     if (timer > 0.3f)
                     {
+                        FindObjectOfType<AudioManager>().Play("ShootSound");
                         gs.Shoot();
                         timer = 0.0f;
                     }
                     //power up shoots
                     if (rifle == true)
                     {
+
                         gunTimer -= Time.deltaTime;  
                         
                         if (gunTimer < 0)
                         {
-                            gs.Shoot();
-                            rifle = false;
-                            gunTimer = 5.0f;
+                            FindObjectOfType<AudioManager>().Play("ShootSound");
+                            gs.Shoot();                            
+                            rifle = false;                         
+                            gunTimer = 0.0f;
                         }                    
                     }
                 }
@@ -199,16 +205,18 @@ public class CharactorMovement : MonoBehaviour
             currentHealth += Random.Range(1, 3) * 4;
             healthBar.SetHealth(currentHealth);
 
+            FindObjectOfType<AudioManager>().Play("PowerUp");
+
             Score.instance.UpdatePowerUpCount();
             Destroy(other.gameObject);
         }
 
         if (other.CompareTag("GunPack"))
-        {
-            //do the power up
-
-
+        {          
             rifle = true;
+            gunTimer += 5.0f;
+
+            FindObjectOfType<AudioManager>().Play("PowerUp");
 
             Score.instance.UpdatePowerUpCount();
             Destroy(other.gameObject);

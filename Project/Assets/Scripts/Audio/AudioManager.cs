@@ -6,15 +6,9 @@ public class AudioManager : MonoBehaviour
 {
     public Sound[] sounds;
 
-    
-
     private void Awake()
-    {
-       
-
+    { 
         
-        DontDestroyOnLoad(gameObject);
-
 
         foreach (Sound s in sounds)
         {
