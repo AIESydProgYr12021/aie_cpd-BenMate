@@ -43,7 +43,6 @@ some Screen shoots i can show are gameplay and the players health.
 ![alt text](./images/Health.png "Logo Title Health 3")
 
 ## Game Systems
-What systems are needed to make this game? Which ones are internal (simulation, etc.) and which does the player interact with? 
 
 - Spawning - Enemies have a grave system that appears in a random location around the map, by default the grave spawns a zombie after one seccond and then gets destroyed.
 
@@ -56,6 +55,8 @@ On windows the player moves with the keyboard and mouse but only on android 2 jo
 - OnCollison Triggers - When the bullet prefab enters the zombies colision, damage is dealt - when the zombie enters the players radius/colision dmage is dealt imediately and collisian stay function allows damage to be dealt over time if the player is still in the radius of the zombie.
 
 - health bar - both enemies and the player have a health bar, when the bullet collides with the zombies a function is called and takes in a value and deal 'damage' to the health bar. ive added a gradient to the bar so the lower the health the more red it gets.
+
+- Power ups - the powerr ups are identifed with a tag 'PowerPack' and are dropped by zombies on death. their is a 80% chance nothing will be dropped, 10% chance a healthpack and a 10% a Gunpack is dropped.
 
 ## Interactivity
 
@@ -105,10 +106,21 @@ The Big Zombie
 - damage is 8 which is 2 bars of health
 - size is 2.5
 
-PowerUps
+## PowerUps
 
-- health
- Heals player 
+- healthPack
+ Heals player for 1-2 health
+ Makes a sound when Picked up.
+ Destroyed after healing player.
+
+![alt text](./images/HealthPack.png "Logo Title Text 1")
+
+- gunPack
+ gives the player an ability for 5 seconds to shoot Really fast, the time stacks if you collect more then 1
+ Makes a sound when Picked up.
+ Destroyed after healing player.
+
+![alt text](./images/GamePack.png "Logo Title Text 1")
 
 ## Game UI:
 - menu concept/wireframe
